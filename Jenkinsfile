@@ -21,8 +21,6 @@ stage('PHPUnit Test') {
                expression {env.BRANCH_NAME == 'master'}
             }                     
             steps {
-              sshagent (credentials: ['mygit-ssh-key'])                        
-		{     
            script {
                    
                         def tag = sh(returnStdout: true, script: "git tag | tail -1").trim()
@@ -40,7 +38,6 @@ stage('PHPUnit Test') {
                     
                 }
               }
-            }
 
         }
          
