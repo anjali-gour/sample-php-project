@@ -21,7 +21,9 @@ stage('PHPUnit Test') {
                expression {env.BRANCH_NAME == 'master'}
             }                     
             steps {
-           script {
+        sshagent (credentials: ['950d88be-a636-40c2-80c2-a162dd0b3791'])                        
+                { 
+	   script {
                    
                         def tag = sh(returnStdout: true, script: "git tag | tail -1").trim()
                         println tag
@@ -38,7 +40,7 @@ stage('PHPUnit Test') {
                     
                 }
               }
-
+		}
         }
          
   }
