@@ -11,19 +11,11 @@ pipeline {
   }
 
   stages {
-    stage('PHPUnit Test') {
-      steps {
-        echo 'Running PHPUnit...'
-        sh '/bin/phpunit ${WORKSPACE}/src'
-      }
-    }
  stage("Create new tag") {
          when {
                expression {env.BRANCH_NAME == 'master'}
             }                     
             steps {
-             sshagent (credentials: ['test-git-tag'])                        
-                {
                 script {
                    
                         def tag = sh(returnStdout: true, script: "git tag | tail -1").trim()
@@ -42,7 +34,6 @@ pipeline {
                 }
               }
                 
-            }
         }
          
   }
